@@ -1,0 +1,7 @@
+from .base_msg import MSP_MESSAGE
+
+class MSP_REBOOT_REQUEST(MSP_MESSAGE):
+    ID = 68
+
+class MSP_REBOOT_RESPONSE(MSP_MESSAGE):
+    ID = 68
