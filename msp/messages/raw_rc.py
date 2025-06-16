@@ -5,6 +5,7 @@ from .base_msg import MSP_MESSAGE
 class MSP_SET_RAW_RC_REQUEST(MSP_MESSAGE):
     ID = 200
     _pack_ = 1
+    _no_reply = True
     _fields_ = [
         ('channels', ctypes.c_uint16 * 8),
     ]

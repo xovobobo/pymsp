@@ -238,7 +238,13 @@ class CommInterface(ABC):
         payload = bytes(msg)
         msg_id = msg.message_id()
 
-        message = bytearray(b"$X<\x00" + msg_id.to_bytes(2, byteorder="little") + len(payload).to_bytes(2, byteorder="little") + payload)
+        if msg._no_reply:
+            flags = 0x01
+        else:
+            flags = 0x00
+
+        message = bytearray(b"$X<" + flags.to_bytes(1, byteorder='little') + msg_id.to_bytes(2, byteorder="little") + len(payload).to_bytes(2, byteorder="little") + payload)
+
         crc = 0
         for byte in message[3:]:
             crc = crc8_dvb_s2(crc, byte)
