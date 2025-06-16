@@ -294,8 +294,10 @@ class SerialComm(CommInterface):
         self.ser = None
         super().__init__()
 
+    def __repr__(self):
+        return f"SerialComm(port={self.port!r},baudrate={self.baudrate!r})"
+
     def connect(self):
-        
         self.ser = serial.Serial(self.port, self.baudrate, timeout=self.timeout)
         if not self.reader_th.is_alive():
             self.reader_th.start()
@@ -348,6 +350,9 @@ class TCPComm(CommInterface):
         self.port = port
         self.sock = None
         super().__init__()
+
+    def __repr__(self):
+        return f"TCPComm(host={self.host!r},port={self.port!r})"
 
     def connect(self):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
